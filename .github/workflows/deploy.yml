@@ -1,0 +1,37 @@
+name: Deploy Backend to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: SSH and Deploy Backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH Agent
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Deploy via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST_BACKEND }} << 'EOF'
+            # Stop and remove old backend container
+            docker stop backend || true
+            docker rm backend || true
+
+            # Remove old code
+            rm -rf ~/backend
+            git clone https://github.com/Abaidullah889/Cloud-Based-Test-Automation-Dashboard-Backened.git backend
+            cd backend
+
+            # Build and start backend container
+            docker build -t backend .
+            docker run -d -p 5000:3000 --name backend backend
+          EOF
