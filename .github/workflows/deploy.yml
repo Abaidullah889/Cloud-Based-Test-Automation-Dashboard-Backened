@@ -23,8 +23,8 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST_BACKEND }} << 'EOF'
             # Stop and remove old backend container
-            docker stop backend || true
-            docker rm backend || true
+            sudo docker stop backend || true
+            sudo docker rm backend || true
 
             # Remove old code
             rm -rf ~/backend
