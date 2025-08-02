@@ -2,7 +2,7 @@
 import socket
 
 host = "localhost"
-port = 5000
+port = 3000
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     result = s.connect_ex((host, port))
