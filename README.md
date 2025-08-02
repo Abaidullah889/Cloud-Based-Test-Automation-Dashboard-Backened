@@ -16,6 +16,15 @@ The backend is deployed inside a private AWS EC2 instance, fully containerized v
 
 ---
 
+---
+
+## 🔗 Live Dashboard
+
+👉 **[Open the Dashboard](http://13.51.175.115/)**  
+
+---
+
+
 ## 🔧 Technology Stack
 
 - **Node.js + Express** – REST API server for running and returning test results
