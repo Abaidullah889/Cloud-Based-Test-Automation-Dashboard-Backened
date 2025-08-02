@@ -2,7 +2,7 @@
 import os
 import sys
 
-files = ["/etc/nginx/nginx.conf", "/var/log/syslog"]
+files = ["/src/server.ts","/src/controllers/testController.ts"]
 
 missing = [f for f in files if not os.path.exists(f)]
 if not missing:
